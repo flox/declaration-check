@@ -19,7 +19,7 @@ on:
     inputs:
       path:
         type: string
-        default: catalog-info.yaml
+        default: flox-info.yaml
   pull_request:
   push:
     branches: [main]
@@ -36,4 +36,4 @@ jobs:
       - uses: flox/declaration-check/.github/actions/check@2f04631c4c19ac18270d6589c8b6bf8ddbbfb504 # keep in step with main
         with:
           check: declaration
-          path: ${{ inputs.path || 'catalog-info.yaml' }}
+          path: ${{ inputs.path || 'flox-info.yaml' }}

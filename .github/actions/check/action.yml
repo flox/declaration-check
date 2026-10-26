@@ -23,7 +23,7 @@ inputs:
   path:
     description: Declaration to read, relative to the repository root.
     required: false
-    default: catalog-info.yaml
+    default: flox-info.yaml
   python-version:
     required: false
     default: '3.12'

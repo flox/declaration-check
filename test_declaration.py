@@ -173,14 +173,14 @@ class TestMonorepoLocations(unittest.TestCase):
         "  name: example\n"
         "spec:\n"
         "  targets:\n"
-        "    - ./src/web-ui/catalog-info.yaml\n"
-        "    - ./src/web-bff/catalog-info.yaml\n"
+        "    - ./src/web-ui/flox-info.yaml\n"
+        "    - ./src/web-bff/flox-info.yaml\n"
     )
 
     def test_targets_are_read_and_normalised(self):
         self.assertEqual(
             declaration.targets(self.LOCATION),
-            ["src/web-ui/catalog-info.yaml", "src/web-bff/catalog-info.yaml"])
+            ["src/web-ui/flox-info.yaml", "src/web-bff/flox-info.yaml"])
 
     def test_a_component_is_not_a_location(self):
         self.assertIsNone(declaration.targets(decl()))
@@ -200,7 +200,7 @@ class TestMonorepoLocations(unittest.TestCase):
         the property ADR-001 exists to get.
         """
         external = (self.LOCATION.split("targets:")[0]
-                    + "targets:\n    - https://example.com/catalog-info.yaml\n")
+                    + "targets:\n    - https://example.com/flox-info.yaml\n")
         with self.assertRaises(declaration.Invalid) as caught:
             declaration.targets(external)
         self.assertIn("not URLs", " ".join(caught.exception.problems))
@@ -376,20 +376,20 @@ class TestTargetPathsWithLeadingDots(unittest.TestCase):
 
     def test_a_dotted_directory_keeps_its_dot(self):
         self.assertEqual(
-            declaration.targets(self.location("./.github/catalog-info.yaml")),
-            [".github/catalog-info.yaml"])
+            declaration.targets(self.location("./.github/flox-info.yaml")),
+            [".github/flox-info.yaml"])
 
     def test_a_dotted_directory_without_a_prefix_is_unchanged(self):
         self.assertEqual(
-            declaration.targets(self.location(".github/catalog-info.yaml")),
-            [".github/catalog-info.yaml"])
+            declaration.targets(self.location(".github/flox-info.yaml")),
+            [".github/flox-info.yaml"])
 
     def test_an_ordinary_relative_prefix_is_still_removed(self):
         self.assertEqual(
-            declaration.targets(self.location("./src/web-ui/catalog-info.yaml")),
-            ["src/web-ui/catalog-info.yaml"])
+            declaration.targets(self.location("./src/web-ui/flox-info.yaml")),
+            ["src/web-ui/flox-info.yaml"])
 
     def test_repeated_prefixes_are_removed_a_segment_at_a_time(self):
         self.assertEqual(
-            declaration.targets(self.location("././.github/x/catalog-info.yaml")),
-            [".github/x/catalog-info.yaml"])
+            declaration.targets(self.location("././.github/x/flox-info.yaml")),
+            [".github/x/flox-info.yaml"])
