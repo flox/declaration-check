@@ -1,18 +1,25 @@
-# catalog-check
+# declaration-check
 
 Checks that a flox repository declares what it is and who owns it.
 
-Every repository carries a `catalog-info.yaml` — a [Backstage entity
-descriptor](https://backstage.io/docs/features/software-catalog/descriptor-format)
-— saying how exposed it is, how much human review a dependency bump needs, its
-maturity, and which area of responsibility owns it. This repository holds the
-check that the declaration is present and complete, and nothing else.
+Every repository carries a `flox-info.yaml` saying how exposed it is, how much
+human review a dependency bump needs, its maturity, and which area of
+responsibility owns it. This repository holds the check that the declaration is
+present and complete, and nothing else.
+
+The contents are a [Backstage entity
+descriptor](https://backstage.io/docs/features/software-catalog/descriptor-format),
+unchanged — the schema is theirs and worth keeping, so a Backstage instance could
+read these as-is. Only the filename is ours. Backstage's own convention is
+`catalog-info.yaml`, and "catalog" at flox means the Flox Catalog, which several
+floxhub components serve; a file in every repository borrowing that word would
+cost more in confusion than the default filename saves in configuration.
 
 ```yaml
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: catalog-check
+  name: declaration-check
   labels:
     flox.dev/classification: internal-tooling   # customer-facing | distribution | internal-tooling | non-shipping | non-production
     flox.dev/max-tier: manual                   # auto | assisted | manual
@@ -31,11 +38,11 @@ else notices.
 
 ## Running it
 
-An organisation ruleset names `.github/workflows/catalog-check.yml` as a required
+An organisation ruleset names `.github/workflows/declaration-check.yml` as a required
 workflow, so repositories do not call it themselves. To run it against a checkout:
 
 ```
-python3 declaration.py --path catalog-info.yaml
+python3 declaration.py --path flox-info.yaml
 ```
 
 It exits 0 when the declaration is complete, 1 with the fields that are missing or

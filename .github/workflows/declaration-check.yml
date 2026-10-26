@@ -10,7 +10,7 @@
 # would reach private repositories only, and 83 of the live ones are public.
 #
 # Nothing here reads a credential, and nothing here needs to. See the action.
-name: catalog-check
+name: declaration-check
 
 on:
   # Kept callable directly so a repository can adopt the check ahead of the
@@ -19,7 +19,7 @@ on:
     inputs:
       path:
         type: string
-        default: catalog-info.yaml
+        default: flox-info.yaml
   pull_request:
   push:
     branches: [main]
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: flox/catalog-check/.github/actions/check@2f04631c4c19ac18270d6589c8b6bf8ddbbfb504 # keep in step with main
+      - uses: flox/declaration-check/.github/actions/check@2f04631c4c19ac18270d6589c8b6bf8ddbbfb504 # keep in step with main
         with:
           check: declaration
-          path: ${{ inputs.path || 'catalog-info.yaml' }}
+          path: ${{ inputs.path || 'flox-info.yaml' }}

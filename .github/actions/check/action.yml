@@ -12,7 +12,7 @@
 # A composite action rather than a reusable workflow for the checks themselves:
 # GitHub fetches an action's source while resolving `uses:`, so a caller needs
 # nothing checked out but its own repository.
-name: catalog-check
+name: declaration-check
 description: Run one of the checks every flox repository must pass.
 
 inputs:
@@ -23,7 +23,7 @@ inputs:
   path:
     description: Declaration to read, relative to the repository root.
     required: false
-    default: catalog-info.yaml
+    default: flox-info.yaml
   python-version:
     required: false
     default: '3.12'

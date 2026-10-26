@@ -1,6 +1,6 @@
 # This repository's own unit tests. Nothing else runs them, and no other
 # repository cares about them — the check other repositories must pass is in
-# catalog-check.yml.
+# declaration-check.yml.
 name: tests
 
 # No paths filter, deliberately. A required check that is skipped never reports,

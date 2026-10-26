@@ -5,7 +5,9 @@ format open. This module is where that choice is made concrete, and it is the on
 place that knows the format: everything downstream takes the dict this returns, so
 changing the encoding later means changing this file and nothing else.
 
-Today the encoding is a Backstage entity descriptor at `catalog-info.yaml`. That
+Today the encoding is a Backstage entity descriptor at `flox-info.yaml` — their
+schema, our filename, because `catalog-info.yaml` would put the Flox Catalog's
+word in every repository. That
 is an implementation detail, not a commitment — see ADR-001 and ADR-008's
 withdrawal. Backstage's own schema validates the envelope; it does not validate
 our facts, because `metadata.labels` is an open string map and will accept a
@@ -383,7 +385,7 @@ def is_expected_in_production(decl, today=None):
 # explains why it is being asked.
 # ---------------------------------------------------------------------------
 
-DEFAULT_PATH = "catalog-info.yaml"
+DEFAULT_PATH = "flox-info.yaml"
 
 TEMPLATE = """apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -487,7 +489,7 @@ def _report_uncovered(args, gaps, declared):
           "declared, because its %d other part%s %s."
           % (declared, "" if declared == 1 else "s",
              "is" if declared == 1 else "are"), file=out)
-    print("\nAdd a catalog-info.yaml in each, and list it in %s. Or, if one of the "
+    print("\nAdd a flox-info.yaml in each, and list it in %s. Or, if one of the "
           "parts already declared should own it, move that declaration up to the "
           "directory above both." % args.path, file=out)
     _write_summary(args, "### Undeclared parts\n\n%s\n"
