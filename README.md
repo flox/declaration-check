@@ -1,4 +1,4 @@
-# catalog-check
+# declaration-check
 
 Checks that a flox repository declares what it is and who owns it.
 
@@ -12,7 +12,7 @@ check that the declaration is present and complete, and nothing else.
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: catalog-check
+  name: declaration-check
   labels:
     flox.dev/classification: internal-tooling   # customer-facing | distribution | internal-tooling | non-shipping | non-production
     flox.dev/max-tier: manual                   # auto | assisted | manual
@@ -31,7 +31,7 @@ else notices.
 
 ## Running it
 
-An organisation ruleset names `.github/workflows/catalog-check.yml` as a required
+An organisation ruleset names `.github/workflows/declaration-check.yml` as a required
 workflow, so repositories do not call it themselves. To run it against a checkout:
 
 ```
